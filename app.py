@@ -56,7 +56,7 @@ html, body, [class*="css"], [data-testid="stMarkdownContainer"] p {{
 
 /* Translucent Sidebar Styling */
 [data-testid="stSidebar"] {{
-    background-image: linear-gradient(rgba(241, 245, 249, 0.85), rgba(241, 245, 249, 0.95)), url("data:image/png;base64,{sidebar_bg_base64}") !important;
+    background-image: linear-gradient(rgba(241, 245, 249, 0.40), rgba(241, 245, 249, 0.50)), url("data:image/png;base64,{sidebar_bg_base64}") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
