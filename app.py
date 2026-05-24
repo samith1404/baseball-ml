@@ -76,6 +76,13 @@ html, body, [class*="css"], [data-testid="stMarkdownContainer"] p {{
     font-weight: 500 !important;
 }}
 
+[data-testid="stSidebar"] code {{
+    background-color: rgba(15, 23, 42, 0.08) !important;
+    color: #0f172a !important;
+    border-radius: 4px !important;
+    padding: 2px 4px !important;
+}}
+
 /* Glassmorphism Panel Class */
 .glass-panel {{
     background: rgba(30, 41, 59, 0.45);
@@ -189,10 +196,10 @@ with st.sidebar:
         team_data = load_data("team_features.csv")
         tweet_data = load_data("clean_tweets.csv")
         
-        st.markdown(f"**⚾ Total Players**: `{player_data['playerID'].nunique():,}`")
-        st.markdown(f"**🏟️ Total Teams**: `{team_data['teamID'].nunique():,}`")
-        st.markdown(f"**📅 Coverage**: `{int(player_data['yearID'].min())} - {int(player_data['yearID'].max())}`")
-        st.markdown(f"**💬 Tweet Corpus**: `{len(tweet_data):,}`")
+        st.markdown(f"**⚾ Total Players**: **{player_data['playerID'].nunique():,}**")
+        st.markdown(f"**🏟️ Total Teams**: **{team_data['teamID'].nunique():,}**")
+        st.markdown(f"**📅 Coverage**: **{int(player_data['yearID'].min())} - {int(player_data['yearID'].max())}**")
+        st.markdown(f"**💬 Tweet Corpus**: **{len(tweet_data):,}**")
     except:
         pass
     st.markdown("---")
