@@ -23,14 +23,31 @@ st.set_page_config(
 def get_base64_of_bin_file(bin_file):
     import base64
     try:
-        with open(bin_file, 'rb') as f:
-            data = f.read()
-        return base64.b64encode(data).decode()
-    except Exception:
+        # Try to open the file from the provided path
+        if os.path.exists(bin_file):
+            with open(bin_file, 'rb') as f:
+                data = f.read()
+            return base64.b64encode(data).decode()
+        else:
+            return ""
+    except Exception as e:
         return ""
 
-bg_base64 = get_base64_of_bin_file(os.path.join(os.path.dirname(__file__), "assets", "background.jpg"))
-sidebar_bg_base64 = get_base64_of_bin_file(os.path.join(os.path.dirname(__file__), "assets", "sidebar_background.png"))
+# Get the base directory for finding assets
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Try to load background images with fallback paths
+bg_paths = [
+    os.path.join(BASE_DIR, "assets", "background.jpg"),
+]
+image_folder_path = [p for p in bg_paths if os.path.exists(p)]
+bg_base64 = get_base64_of_bin_file(image_folder_path[0]) if image_folder_path else ""
+
+sidebar_paths = [
+    os.path.join(BASE_DIR, "assets", "sidebar_background.png"),
+]
+sidebar_folder_path = [p for p in sidebar_paths if os.path.exists(p)]
+sidebar_bg_base64 = get_base64_of_bin_file(sidebar_folder_path[0]) if sidebar_folder_path else ""
 
 st.markdown(f"""
 <style>
@@ -87,10 +104,18 @@ def load_data(fname):
 
 @st.cache_resource
 def load_model(fname):
-    path = os.path.join(BASE, "saved_models", fname)
-    if not os.path.exists(path):
-        return None
-    return joblib.load(path)
+    # Try both paths for compatibility with local dev and Streamlit Cloud
+    possible_paths = [
+        os.path.join(BASE, "saved_models", fname),  # Local development path
+        os.path.join(BASE, fname)  # Streamlit Cloud root path
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path):
+            return joblib.load(path)
+    
+    # If model not found in either location, return None
+    return None
 
 def plotly_dark():
     return dict(
