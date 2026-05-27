@@ -375,8 +375,8 @@ elif page == "📈 Player Performance (XAI)":
             # Custom styled axes for dark styling
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)
-            ax.spines['left'].set_color('rgba(255, 255, 255, 0.15)')
-            ax.spines['bottom'].set_color('rgba(255, 255, 255, 0.15)')
+            ax.spines['left'].set_color((1.0, 1.0, 1.0, 0.15))
+            ax.spines['bottom'].set_color((1.0, 1.0, 1.0, 0.15))
             ax.tick_params(colors='#94a3b8', labelsize=9)
             ax.xaxis.label.set_color('#cbd5e1')
             st.pyplot(fig, clear_figure=True)
@@ -395,8 +395,8 @@ elif page == "📈 Player Performance (XAI)":
             
             ax2.spines['top'].set_visible(False)
             ax2.spines['right'].set_visible(False)
-            ax2.spines['left'].set_color('rgba(255, 255, 255, 0.15)')
-            ax2.spines['bottom'].set_color('rgba(255, 255, 255, 0.15)')
+            ax2.spines['left'].set_color((1.0, 1.0, 1.0, 0.15))
+            ax2.spines['bottom'].set_color((1.0, 1.0, 1.0, 0.15))
             ax2.tick_params(colors='#94a3b8', labelsize=9)
             ax2.xaxis.label.set_color('#cbd5e1')
             st.pyplot(fig2, clear_figure=True)
